@@ -10,11 +10,12 @@ import (
 )
 
 const (
-	ResyncCircle = 600
+	ResyncCircle = 10
 	Stopped      = "stopped"
 	PvcPending   = "Pending"
 	Running      = "running"
 	Updating     = "updating"
+	Error        = "error"
 )
 
 type BaseModel struct {

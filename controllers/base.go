@@ -1,14 +1,17 @@
 package controllers
 
 import (
+	"sync"
+	"time"
+
 	"gorm.io/gorm"
 	"k8s.io/client-go/kubernetes"
 )
 
 type CommonAttribute struct {
-	K8sClient *kubernetes.Clientset
 	Name      string
 	DB        *gorm.DB
+	K8sClient *kubernetes.Clientset
 	stopChan  chan struct{}
 	aliveChan chan struct{}
 }
@@ -30,9 +33,10 @@ type Controller interface {
 	Name() string
 	sync(stopChan chan struct{})
 	initListerAndInformer()
-	total() int
+	total() int64
 	CountWithConditions(condition string) int64
-	ListWithConditions(condition string, paging *Paging) (int, interface{}, error)
+	ListWithConditions(condition string, paging *Paging, order string) (int64, interface{}, error)
+	Lister() interface{}
 	chanAlive() chan struct{}
 	chanStop() chan struct{}
 }
@@ -68,4 +72,54 @@ func listWithConditions(db *gorm.DB, total *int64, object, list interface{}, con
 			db.Order(order).Find(list)
 		}
 	}
+}
+
+func handleCrash(ctl Controller) {
+	close(ctl.chanAlive())
+	if err := recover(); err != nil {
+		return
+	}
+}
+
+func hasSynced(ctl Controller) bool {
+	totalInDb := ctl.CountWithConditions("")
+	totalInK8s := ctl.total()
+
+	return totalInDb == totalInK8s
+}
+
+func checkAndResync(ctl Controller, stopChan chan struct{}) {
+	defer close(stopChan)
+
+	lastTime := time.Now()
+
+	for {
+		select {
+		case <-ctl.chanStop():
+			return
+		default:
+			if time.Since(lastTime) < time.Minute {
+				time.Sleep(time.Second * 20)
+				break
+			}
+
+			lastTime = time.Now()
+			if !hasSynced(ctl) {
+				close(stopChan)
+				stopChan = make(chan struct{})
+				go ctl.sync(stopChan)
+			}
+		}
+	}
+}
+
+func listAndWatch(ctl Controller, wg *sync.WaitGroup) {
+	defer handleCrash(ctl)
+	// defer ctl.CloseDB()
+	defer wg.Done()
+	stopChan := make(chan struct{})
+
+	go ctl.sync(stopChan)
+
+	checkAndResync(ctl, stopChan)
 }

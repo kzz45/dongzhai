@@ -2,7 +2,7 @@ package models
 
 type Cluster struct {
 	BaseModel
-	Nmme       string `json:"name"`
+	Name       string `json:"name"`
 	Desc       string `json:"desc"`
 	Sign       string `json:"sign"`
 	Addr       string `json:"addr"`

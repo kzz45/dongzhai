@@ -9,10 +9,10 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-var dbClient *gorm.DB
+var DBClient *gorm.DB
 
 func NewDBClient() *gorm.DB {
-	if dbClient == nil {
+	if DBClient == nil {
 		db, err := gorm.Open(mysql.New(mysql.Config{
 			DSN: fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local",
 				config.GlobalConfig.Database.Username,
@@ -28,8 +28,8 @@ func NewDBClient() *gorm.DB {
 		if err != nil {
 			panic(err)
 		}
-		dbClient = db
-		return dbClient
+		DBClient = db
+		return DBClient
 	}
-	return dbClient
+	return DBClient
 }

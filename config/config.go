@@ -1,8 +1,11 @@
 package config
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
+	"path/filepath"
 
 	"gopkg.in/yaml.v2"
 )
@@ -30,7 +33,13 @@ type Database struct {
 var GlobalConfig Config
 
 func init() {
-	yaml_file, err := ioutil.ReadFile("./server.yaml")
+	root_dir, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	work_dir := filepath.Dir(root_dir)
+	cfg_file := fmt.Sprintf("%s/server.yaml", work_dir)
+	yaml_file, err := ioutil.ReadFile(cfg_file)
 	if err != nil {
 		log.Fatalln(err)
 		return
