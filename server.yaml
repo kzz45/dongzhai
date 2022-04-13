@@ -1,0 +1,12 @@
+server:
+  name: dongzhai
+  debug: false
+  host: 0.0.0.0
+  port: 9898
+
+database:
+  host: 127.0.0.1
+  port: 3306
+  name: dongzhai
+  username: root
+  password: 123456
