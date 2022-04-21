@@ -26,3 +26,15 @@ type UserGroup struct {
 func (UserGroup) TableName() string {
 	return TableNameUserGroup
 }
+
+type UserLogin struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type UserLoginResp struct {
+	Id       uint   `json:"id"`
+	Token    string `json:"token"`
+	Username string `json:"username"`
+	Nickname string `json:"nickname"`
+}

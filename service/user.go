@@ -3,6 +3,7 @@ package service
 import (
 	"dongzhai/db"
 	"dongzhai/models"
+	"dongzhai/utils"
 	"errors"
 
 	"gorm.io/gorm"
@@ -54,6 +55,12 @@ func GetUsers(p *models.Pagination) ([]models.User, int64, error) {
 	return users, p.Total, nil
 }
 
+func GetUserById(id int) (models.User, error) {
+	var user models.User
+	err := db.GlobalGorm.Where("id = ?", id).Preload("Role").First(&user).Error
+	return user, err
+}
+
 func UpdateUser(user models.User) error {
 	var user_group models.UserGroup
 	var user_groups []models.UserGroup
@@ -95,4 +102,22 @@ func DeleteUserById(id int) error {
 		return err
 	}
 	return tx.Commit().Error
+}
+
+func UserLogin(u models.UserLogin) (models.UserLoginResp, error) {
+	var user models.User
+	var user_resp models.UserLoginResp
+	err := db.GlobalGorm.Where("username = ? AND password = ?", u.Username, u.Password).First(&user).Error
+	if err != nil {
+		return user_resp, err
+	}
+	token, err := utils.CreateToken(user.ID, user.Username, user.Password, *user.RoleId, user.Admin)
+	if err != nil {
+		return user_resp, err
+	}
+	user_resp.Id = user.ID
+	user_resp.Username = user.Username
+	user_resp.Nickname = user.Nickname
+	user_resp.Token = token
+	return user_resp, nil
 }

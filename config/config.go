@@ -13,10 +13,11 @@ type Config struct {
 }
 
 type Server struct {
-	Name  string `yaml:"name"`
-	Debug bool   `yaml:"debug"`
-	Host  string `yaml:"host"`
-	Port  int    `yaml:"port"`
+	Name   string `yaml:"name"`
+	Debug  bool   `yaml:"debug"`
+	Host   string `yaml:"host"`
+	Port   int    `yaml:"port"`
+	Secret string `yaml:"secret"`
 }
 
 type Database struct {

@@ -1,6 +1,7 @@
 package router
 
 import (
+	"dongzhai/apis"
 	"dongzhai/config"
 	"dongzhai/router/monitor"
 	"fmt"
@@ -18,6 +19,9 @@ func InitRouter() {
 	route := gin.Default()
 
 	v1_base := route.Group("/api/v1")
+	v1_base.POST("/login", apis.UserLogin)
+	v1_base.POST("/logout", apis.UserLogout)
+
 	{
 		userRouter(v1_base)
 		roleRouter(v1_base)
