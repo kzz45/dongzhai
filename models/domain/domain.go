@@ -1,8 +1,10 @@
-package models
+package domain
+
+import "dongzhai/models"
 
 // 顶级域名
 type Domain struct {
-	BaseModel
+	models.BaseModel
 	Name          string         `json:"name"`                                    //
 	Desc          string         `json:"desc"`                                    //
 	DomainCerts   []DomainCert   `json:"domain_certs" gorm:"foreignKey:DomainId"` //
@@ -10,12 +12,12 @@ type Domain struct {
 }
 
 func (Domain) TableName() string {
-	return TableNameDomain
+	return models.TableNameDomain
 }
 
 // 域名解析记录
 type DomainRecord struct {
-	BaseModel
+	models.BaseModel
 	DomainId uint   `json:"domain_id"`                         //
 	Domain   Domain `json:"domain" gorm:"foreignKey:DomainId"` //
 	Name     string `json:"name"`                              //
@@ -27,12 +29,12 @@ type DomainRecord struct {
 }
 
 func (DomainRecord) TableName() string {
-	return TableNameDomainRecord
+	return models.TableNameDomainRecord
 }
 
 // 域名证书
 type DomainCert struct {
-	BaseModel
+	models.BaseModel
 	DomainId uint   `json:"domain_id"`                         //
 	Domain   Domain `json:"domain" gorm:"foreignKey:DomainId"` //
 	Name     string `json:"name"`                              //
@@ -40,5 +42,5 @@ type DomainCert struct {
 }
 
 func (DomainCert) TableName() string {
-	return TableNameDomainCert
+	return models.TableNameDomainCert
 }

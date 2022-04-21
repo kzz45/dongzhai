@@ -1,8 +1,8 @@
 package main
 
 import (
-	"dongzhai/config"
 	"dongzhai/db"
+	"dongzhai/router"
 	"fmt"
 )
 
@@ -11,5 +11,5 @@ func main() {
 	err := db.Ping()
 	fmt.Println(err)
 
-	fmt.Println(config.GlobalConfig.Server.Name)
+	router.InitRouter()
 }
