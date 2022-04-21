@@ -2,7 +2,9 @@ package db
 
 import (
 	"dongzhai/config"
+	"dongzhai/models"
 	"dongzhai/models/domain"
+	"dongzhai/models/monitor"
 	"fmt"
 
 	"github.com/sirupsen/logrus"
@@ -38,7 +40,22 @@ func init() {
 	}
 	logrus.Infoln("connect mysql success")
 
+	GlobalGorm.AutoMigrate(&models.User{})
+	GlobalGorm.AutoMigrate(&models.UserGroup{})
+
+	GlobalGorm.AutoMigrate(&models.Cloud{})
+	GlobalGorm.AutoMigrate(&models.Product{})
+
 	GlobalGorm.AutoMigrate(&domain.Domain{})
 	GlobalGorm.AutoMigrate(&domain.DomainCert{})
 	GlobalGorm.AutoMigrate(&domain.DomainRecord{})
+
+	GlobalGorm.AutoMigrate(&monitor.Task{})
+	GlobalGorm.AutoMigrate(&monitor.Label{})
+	GlobalGorm.AutoMigrate(&monitor.Server{})
+	GlobalGorm.AutoMigrate(&monitor.Receiver{})
+	GlobalGorm.AutoMigrate(&monitor.Instance{})
+	GlobalGorm.AutoMigrate(&monitor.AlertRule{})
+	GlobalGorm.AutoMigrate(&monitor.LabelValue{})
+	GlobalGorm.AutoMigrate(&monitor.AlertRoute{})
 }

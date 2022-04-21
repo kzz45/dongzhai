@@ -7,17 +7,24 @@ import (
 )
 
 const (
-	TableNameCloud        = "cloud"
-	TableNameDomain       = "domain"
-	TableNameDomainCert   = "domain_cert"
-	TableNameDomainRecord = "domain_record"
-	TableNameTask         = "monitor_task"
-	TableNameGroup        = "monitor_group"
-	TableNameServer       = "monitor_server"
-	TableNameProduct      = "monitor_product"
-	TableNameInstance     = "monitor_instance"
-	TableNameAlertRule    = "monitor_alert_rule"
-	TableNameAlertRoute   = "monitor_alert_route"
+	TableNameUser          = "user"
+	TableNameRole          = "role"
+	TableNameUserGroup     = "group"
+	TableNameCloud         = "cloud"
+	TableNameDomain        = "domain"
+	TableNameDomainCert    = "domain_cert"
+	TableNameDomainRecord  = "domain_record"
+	TableNameTask          = "monitor_task"
+	TableNameLabel         = "monitor_label"
+	TableNameGroup         = "monitor_group"
+	TableNameServer        = "monitor_server"
+	TableNameProduct       = "monitor_product"
+	TableNameInstance      = "monitor_instance"
+	TableNameInstanceGroup = "monitor_instance_group"
+	TableNameReceiver      = "monitor_receiver"
+	TableNameAlertRule     = "monitor_alert_rule"
+	TableNameAlertRoute    = "monitor_alert_route"
+	TableNameLabelValue    = "monitor_label_value"
 )
 
 type BaseModel struct {
