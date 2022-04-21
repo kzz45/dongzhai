@@ -111,7 +111,7 @@ func UserLogin(u models.UserLogin) (models.UserLoginResp, error) {
 	if err != nil {
 		return user_resp, err
 	}
-	token, err := utils.CreateToken(user.ID, user.Username, user.Password, *user.RoleId, user.Admin)
+	token, err := utils.CreateToken(user.ID, user.Username, user.Password, user.RoleId, user.Admin)
 	if err != nil {
 		return user_resp, err
 	}

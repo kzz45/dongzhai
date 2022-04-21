@@ -2,7 +2,7 @@ package models
 
 type User struct {
 	BaseModel
-	RoleId   *uint       `json:"role_id"`                             //
+	RoleId   uint        `json:"role_id"`                             //
 	Role     Role        `json:"role" gorm:"foreignKey:RoleId;"`      // 角色
 	Username string      `json:"username"`                            // 用户名
 	Nickname string      `json:"nickname"`                            // 别名
