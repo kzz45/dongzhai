@@ -79,5 +79,20 @@ func UpdateUser(user models.User) error {
 }
 
 func DeleteUserById(id int) error {
-	return nil
+	var user models.User
+	tx := db.GlobalGorm.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		}
+	}()
+	if err := tx.Where("id = ?", id).First(&user).Delete(&user).Error; err != nil {
+		tx.Rollback()
+		return err
+	}
+	if err := tx.Model(&user).Association("Groups").Clear(); err != nil {
+		tx.Rollback()
+		return err
+	}
+	return tx.Commit().Error
 }

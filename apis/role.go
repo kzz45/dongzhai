@@ -10,26 +10,26 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func CreateUser(c *gin.Context) {
-	var user models.User
-	if err := c.Bind(&user); err != nil {
+func CreateRole(c *gin.Context) {
+	var role models.Role
+	if err := c.Bind(&role); err != nil {
 		Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	if err := service.CreateUser(user); err != nil {
+	if err := service.CreateRole(role); err != nil {
 		Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	Response(http.StatusOK, "add user success", nil, c)
+	Response(http.StatusOK, "add role success", nil, c)
 }
 
-func GetUsers(c *gin.Context) {
+func GetRoles(c *gin.Context) {
 	query := &models.Pagination{}
 	if err := c.ShouldBindQuery(query); err != nil {
 		Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	users, total, err := service.GetUsers(query)
+	roles, total, err := service.GetRoles(query)
 	if err != nil {
 		Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
@@ -38,34 +38,34 @@ func GetUsers(c *gin.Context) {
 		"page":  query.Page,
 		"size":  query.Size,
 		"total": total,
-		"data":  users,
+		"data":  roles,
 	}
-	Response(http.StatusOK, "get user success", data, c)
+	Response(http.StatusOK, "get roles success", data, c)
 }
 
-func UpdateUser(c *gin.Context) {
-	var user models.User
-	if err := c.Bind(&user); err != nil {
+func UpdateRole(c *gin.Context) {
+	var role models.Role
+	if err := c.Bind(&role); err != nil {
 		Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	if err := service.UpdateUser(user); err != nil {
+	if err := service.UpdateRole(role); err != nil {
 		Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	Response(http.StatusOK, "update user success", user, c)
+	Response(http.StatusOK, "update role success", role, c)
 }
 
-func DeleteUserById(c *gin.Context) {
+func DeleteRoleById(c *gin.Context) {
 	id := c.Param("id")
-	user_id, err := strconv.Atoi(id)
+	role_id, err := strconv.Atoi(id)
 	if err != nil {
 		Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	if err = service.DeleteUserById(user_id); err != nil {
+	if err = service.DeleteRoleById(role_id); err != nil {
 		Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	Response(http.StatusOK, "delete user success", nil, c)
+	Response(http.StatusOK, "delete role success", nil, c)
 }

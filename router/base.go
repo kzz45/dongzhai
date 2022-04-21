@@ -20,6 +20,7 @@ func InitRouter() {
 	v1_base := route.Group("/api/v1")
 	{
 		userRouter(v1_base)
+		roleRouter(v1_base)
 		cloudRouter(v1_base)
 		productRouter(v1_base)
 	}
