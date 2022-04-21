@@ -18,8 +18,9 @@ func (User) TableName() string {
 
 type UserGroup struct {
 	BaseModel
-	Name string `json:"name"` //
-	Desc string `json:"desc"` //
+	Name  string `json:"name"`                               //
+	Desc  string `json:"desc"`                               //
+	Users []User `json:"users" gorm:"many2many:user_group;"` //
 }
 
 func (UserGroup) TableName() string {

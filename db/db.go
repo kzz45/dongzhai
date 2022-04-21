@@ -41,6 +41,7 @@ func init() {
 	logrus.Infoln("connect mysql success")
 
 	GlobalGorm.AutoMigrate(&models.User{})
+	GlobalGorm.AutoMigrate(&models.Role{})
 	GlobalGorm.AutoMigrate(&models.UserGroup{})
 
 	GlobalGorm.AutoMigrate(&models.Cloud{})
