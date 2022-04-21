@@ -7,24 +7,39 @@ import (
 )
 
 const (
-	TableNameUser          = "user"
-	TableNameRole          = "role"
-	TableNameUserGroup     = "group"
-	TableNameCloud         = "cloud"
-	TableNameDomain        = "domain"
-	TableNameDomainCert    = "domain_cert"
-	TableNameDomainRecord  = "domain_record"
-	TableNameTask          = "monitor_task"
-	TableNameLabel         = "monitor_label"
-	TableNameGroup         = "monitor_group"
-	TableNameServer        = "monitor_server"
-	TableNameProduct       = "monitor_product"
-	TableNameInstance      = "monitor_instance"
-	TableNameInstanceGroup = "monitor_instance_group"
-	TableNameReceiver      = "monitor_receiver"
-	TableNameAlertRule     = "monitor_alert_rule"
-	TableNameAlertRoute    = "monitor_alert_route"
-	TableNameLabelValue    = "monitor_label_value"
+	TableNameUser          = "user"                   //
+	TableNameRole          = "role"                   //
+	TableNameUserGroup     = "group"                  //
+	TableNameCloud         = "cloud"                  //
+	TableNameDomain        = "domain"                 //
+	TableNameDomainCert    = "domain_cert"            //
+	TableNameDomainRecord  = "domain_record"          //
+	TableNameTask          = "monitor_task"           //
+	TableNameLabel         = "monitor_label"          //
+	TableNameGroup         = "monitor_group"          //
+	TableNameServer        = "monitor_server"         //
+	TableNameProduct       = "monitor_product"        //
+	TableNameInstance      = "monitor_instance"       //
+	TableNameReceiver      = "monitor_receiver"       //
+	TableNameAlertRule     = "monitor_alert_rule"     //
+	TableNameAlertRoute    = "monitor_alert_route"    //
+	TableNameLabelValue    = "monitor_label_value"    //
+	TableNameInstanceGroup = "monitor_instance_group" //
+	TableNamePod           = "k8s_pod"                //
+	TableNameJob           = "k8s_job"                //
+	TableNameNode          = "k8s_node"               //
+	TableNameSecret        = "k8s_secret"             //
+	TableNameCluster       = "k8s_cluster"            //
+	TableNameService       = "k8s_service"            //
+	TableNameIngress       = "k8s_ingress"            //
+	TableNameRegistry      = "k8s_registry"           //
+	TableNameContainer     = "k8s_container"          //
+	TableNameConfigmap     = "k8s_configmap"          //
+	TableNameDaemonset     = "k8s_daemonset"          //
+	TableNameDeployment    = "k8s_deployment"         //
+	TableNameStatefulset   = "k8s_statefulset"        //
+	TableNameIngressRule   = "k8s_ingress_rule"       //
+	TableNameServicePort   = "k8s_service_port"       //
 )
 
 type BaseModel struct {
