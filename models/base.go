@@ -28,7 +28,9 @@ const (
 	TableNamePod           = "k8s_pod"                //
 	TableNameJob           = "k8s_job"                //
 	TableNameNode          = "k8s_node"               //
+	TableNameImage         = "k8s_image"              //
 	TableNameSecret        = "k8s_secret"             //
+	TableNameProject       = "k8s_project"            //
 	TableNameCluster       = "k8s_cluster"            //
 	TableNameService       = "k8s_service"            //
 	TableNameIngress       = "k8s_ingress"            //
@@ -40,6 +42,8 @@ const (
 	TableNameStatefulset   = "k8s_statefulset"        //
 	TableNameIngressRule   = "k8s_ingress_rule"       //
 	TableNameServicePort   = "k8s_service_port"       //
+	TableNameImageVersion  = "k8s_image_version"      //
+	TableNameContainerPort = "k8s_container_port"     //
 )
 
 type BaseModel struct {
