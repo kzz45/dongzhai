@@ -7,31 +7,30 @@ import (
 	service "dongzhai/service/monitor"
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
-func CreateServer(c *gin.Context) {
-	var server monitor.Server
-	if err := c.Bind(&server); err != nil {
+func CreateLabelName(c *gin.Context) {
+	var label monitor.Label
+	if err := c.Bind(&label); err != nil {
 		apis.Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	if err := service.CreateServer(server); err != nil {
+	if err := service.CreateLabelName(label); err != nil {
 		apis.Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	apis.Response(http.StatusOK, "add server success", nil, c)
+	apis.Response(http.StatusOK, "add label success", nil, c)
 }
 
-func GetServers(c *gin.Context) {
+func GetLabelName(c *gin.Context) {
 	query := &models.Pagination{}
 	if err := c.ShouldBindQuery(query); err != nil {
 		apis.Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	servers, total, err := service.GetServers(query)
+	label_names, total, err := service.GetLabelName(query)
 	if err != nil {
 		apis.Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
@@ -40,33 +39,38 @@ func GetServers(c *gin.Context) {
 		"page":  query.Page,
 		"size":  query.Size,
 		"total": total,
-		"data":  servers,
+		"data":  label_names,
 	})
 }
 
-func UpdateServer(c *gin.Context) {
-	var server monitor.Server
-	if err := c.Bind(&server); err != nil {
+func CreateLabelValue(c *gin.Context) {
+	var label_value monitor.LabelValue
+	if err := c.Bind(&label_value); err != nil {
 		apis.Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	if err := service.UpdateServer(server); err != nil {
+	if err := service.CreateLabelValue(label_value); err != nil {
 		apis.Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	apis.Response(http.StatusOK, "update server success", server, c)
+	apis.Response(http.StatusOK, "add label_value success", nil, c)
 }
 
-func DeleteServerById(c *gin.Context) {
-	id := c.Param("id")
-	cloud_id, err := strconv.Atoi(id)
-	if err != nil {
+func GetLabelValue(c *gin.Context) {
+	query := &models.Pagination{}
+	if err := c.ShouldBindQuery(query); err != nil {
 		apis.Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	if err = service.DeleteServerById(cloud_id); err != nil {
+	label_values, total, err := service.GetLabelValue(query)
+	if err != nil {
 		apis.Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	apis.Response(http.StatusOK, "delete cloud success", nil, c)
+	c.JSON(http.StatusOK, gin.H{
+		"page":  query.Page,
+		"size":  query.Size,
+		"total": total,
+		"data":  label_values,
+	})
 }

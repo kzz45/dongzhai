@@ -31,6 +31,7 @@ func InitRouter() {
 
 	v1_monitor := route.Group("/api/v1/monitor")
 	{
+		monitor.LabelRouter(v1_monitor)
 		monitor.ServerRouter(v1_monitor)
 	}
 
