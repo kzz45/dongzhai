@@ -33,6 +33,7 @@ func InitRouter() {
 		k8s.SecretRouter(v1_base)
 		k8s.ProjectRouter(v1_base)
 		k8s.ClusterRouter(v1_base)
+		k8s.ConfigMapRouter(v1_base)
 	}
 
 	v1_monitor := route.Group("/api/v1/monitor")
