@@ -12,26 +12,26 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func CreateCluster(c *gin.Context) {
-	var cluster k8s_model.Cluster
-	if err := c.Bind(&cluster); err != nil {
+func CreateProject(c *gin.Context) {
+	var project k8s_model.Project
+	if err := c.Bind(&project); err != nil {
 		apis.Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	if err := k8s_service.CreateCluster(cluster); err != nil {
+	if err := k8s_service.CreateProject(project); err != nil {
 		apis.Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	apis.Response(http.StatusOK, "add cluster success", nil, c)
+	apis.Response(http.StatusOK, "create project success", nil, c)
 }
 
-func GetCluster(c *gin.Context) {
+func GetProjects(c *gin.Context) {
 	query := &models.Pagination{}
 	if err := c.ShouldBindQuery(query); err != nil {
 		apis.Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	clusters, total, err := k8s_service.GetClusters(query)
+	projects, total, err := k8s_service.GetProjects(query)
 	if err != nil {
 		apis.Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
@@ -40,33 +40,33 @@ func GetCluster(c *gin.Context) {
 		"page":  query.Page,
 		"size":  query.Size,
 		"total": total,
-		"data":  clusters,
+		"data":  projects,
 	})
 }
 
-func UpdateCluster(c *gin.Context) {
-	var cluster k8s_model.Cluster
-	if err := c.Bind(&cluster); err != nil {
+func UpdateProject(c *gin.Context) {
+	var project k8s_model.Project
+	if err := c.Bind(&project); err != nil {
 		apis.Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	if err := k8s_service.UpdateCluster(cluster); err != nil {
+	if err := k8s_service.UpdateProject(project); err != nil {
 		apis.Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	apis.Response(http.StatusOK, "update cluster success", cluster, c)
+	apis.Response(http.StatusOK, "update project success", project, c)
 }
 
-func DeleteClusterById(c *gin.Context) {
+func DeleteProjectById(c *gin.Context) {
 	id := c.Param("id")
-	cluster_id, err := strconv.Atoi(id)
+	project_id, err := strconv.Atoi(id)
 	if err != nil {
 		apis.Response(http.StatusBadRequest, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	if err = k8s_service.DeleteClusterById(cluster_id); err != nil {
+	if err = k8s_service.DeleteProjectById(project_id); err != nil {
 		apis.Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	apis.Response(http.StatusOK, "delete cluster success", nil, c)
+	apis.Response(http.StatusOK, "delete project success", nil, c)
 }

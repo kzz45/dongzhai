@@ -3,9 +3,7 @@ package db
 import (
 	"dongzhai/config"
 	"dongzhai/models"
-	"dongzhai/models/domain"
 	"dongzhai/models/k8s"
-	"dongzhai/models/monitor"
 	"fmt"
 
 	"github.com/sirupsen/logrus"
@@ -48,20 +46,21 @@ func init() {
 	GlobalGorm.AutoMigrate(&models.Cloud{})
 	GlobalGorm.AutoMigrate(&models.Product{})
 
-	GlobalGorm.AutoMigrate(&domain.Domain{})
-	GlobalGorm.AutoMigrate(&domain.DomainCert{})
-	GlobalGorm.AutoMigrate(&domain.DomainRecord{})
+	// GlobalGorm.AutoMigrate(&domain.Domain{})
+	// GlobalGorm.AutoMigrate(&domain.DomainCert{})
+	// GlobalGorm.AutoMigrate(&domain.DomainRecord{})
 
-	GlobalGorm.AutoMigrate(&monitor.Task{})
-	GlobalGorm.AutoMigrate(&monitor.Label{})
-	GlobalGorm.AutoMigrate(&monitor.Server{})
-	GlobalGorm.AutoMigrate(&monitor.Receiver{})
-	GlobalGorm.AutoMigrate(&monitor.Instance{})
-	GlobalGorm.AutoMigrate(&monitor.AlertRule{})
-	GlobalGorm.AutoMigrate(&monitor.LabelValue{})
-	GlobalGorm.AutoMigrate(&monitor.AlertRoute{})
+	// GlobalGorm.AutoMigrate(&monitor.Task{})
+	// GlobalGorm.AutoMigrate(&monitor.Label{})
+	// GlobalGorm.AutoMigrate(&monitor.Server{})
+	// GlobalGorm.AutoMigrate(&monitor.Receiver{})
+	// GlobalGorm.AutoMigrate(&monitor.Instance{})
+	// GlobalGorm.AutoMigrate(&monitor.AlertRule{})
+	// GlobalGorm.AutoMigrate(&monitor.LabelValue{})
+	// GlobalGorm.AutoMigrate(&monitor.AlertRoute{})
 
 	GlobalGorm.AutoMigrate(&k8s.Node{})
+	GlobalGorm.AutoMigrate(&k8s.Project{})
 	GlobalGorm.AutoMigrate(&k8s.Cluster{})
 	GlobalGorm.AutoMigrate(&k8s.Registry{})
 	// GlobalGorm.AutoMigrate(&k8s.Service{})

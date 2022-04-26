@@ -12,13 +12,13 @@ const (
 	TableNameUserGroup     = "group"                  //
 	TableNameCloud         = "cloud"                  //
 	TableNameDomain        = "domain"                 //
+	TableNameProduct       = "product"                //
 	TableNameDomainCert    = "domain_cert"            //
 	TableNameDomainRecord  = "domain_record"          //
 	TableNameTask          = "monitor_task"           //
 	TableNameLabel         = "monitor_label"          //
 	TableNameGroup         = "monitor_group"          //
 	TableNameServer        = "monitor_server"         //
-	TableNameProduct       = "monitor_product"        //
 	TableNameInstance      = "monitor_instance"       //
 	TableNameReceiver      = "monitor_receiver"       //
 	TableNameAlertRule     = "monitor_alert_rule"     //
