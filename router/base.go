@@ -34,6 +34,7 @@ func InitRouter() {
 		k8s.SecretRouter(v1_base)
 		k8s.ProjectRouter(v1_base)
 		k8s.ClusterRouter(v1_base)
+		k8s.ServiceRouter(v1_base)
 		k8s.ConfigMapRouter(v1_base)
 	}
 
