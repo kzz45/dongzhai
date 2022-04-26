@@ -60,9 +60,11 @@ func init() {
 	// GlobalGorm.AutoMigrate(&monitor.AlertRoute{})
 
 	GlobalGorm.AutoMigrate(&k8s.Node{})
+	GlobalGorm.AutoMigrate(&k8s.Secret{})
 	GlobalGorm.AutoMigrate(&k8s.Project{})
 	GlobalGorm.AutoMigrate(&k8s.Cluster{})
 	GlobalGorm.AutoMigrate(&k8s.Registry{})
+	GlobalGorm.AutoMigrate(&k8s.ConfigMap{})
 	// GlobalGorm.AutoMigrate(&k8s.Service{})
 	// GlobalGorm.AutoMigrate(&k8s.Ingress{})
 	// GlobalGorm.AutoMigrate(&k8s.ConfigMap{})
