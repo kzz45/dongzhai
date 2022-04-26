@@ -48,7 +48,6 @@ func GetK8sClientWithToken(cluster k8s.Cluster) (*kubernetes.Clientset, error) {
 	return clientset, nil
 }
 
-// 多个集群的k8s客户端
 func NewK8SClients() (map[uint]*kubernetes.Clientset, error) {
 	var clusters []k8s.Cluster
 	if err := db.GlobalGorm.Find(&clusters).Error; err != nil {

@@ -4,6 +4,7 @@ import (
 	"dongzhai/config"
 	"dongzhai/models"
 	"dongzhai/models/domain"
+	"dongzhai/models/k8s"
 	"dongzhai/models/monitor"
 	"fmt"
 
@@ -59,4 +60,13 @@ func init() {
 	GlobalGorm.AutoMigrate(&monitor.AlertRule{})
 	GlobalGorm.AutoMigrate(&monitor.LabelValue{})
 	GlobalGorm.AutoMigrate(&monitor.AlertRoute{})
+
+	GlobalGorm.AutoMigrate(&k8s.Node{})
+	GlobalGorm.AutoMigrate(&k8s.Cluster{})
+	// GlobalGorm.AutoMigrate(&k8s.Service{})
+	// GlobalGorm.AutoMigrate(&k8s.Ingress{})
+	// GlobalGorm.AutoMigrate(&k8s.ConfigMap{})
+	// GlobalGorm.AutoMigrate(&k8s.Deployment{})
+	// GlobalGorm.AutoMigrate(&k8s.IngressRule{})
+	// GlobalGorm.AutoMigrate(&k8s.ServicePort{})
 }
