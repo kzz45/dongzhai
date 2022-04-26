@@ -59,6 +59,7 @@ func init() {
 	// GlobalGorm.AutoMigrate(&monitor.LabelValue{})
 	// GlobalGorm.AutoMigrate(&monitor.AlertRoute{})
 
+	GlobalGorm.AutoMigrate(&k8s.Pod{})
 	GlobalGorm.AutoMigrate(&k8s.Job{})
 	GlobalGorm.AutoMigrate(&k8s.Node{})
 	GlobalGorm.AutoMigrate(&k8s.Secret{})

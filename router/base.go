@@ -30,6 +30,7 @@ func InitRouter() {
 		cloudRouter(v1_base)
 		productRouter(v1_base)
 
+		k8s.PodRouters(v1_base)
 		k8s.JobsRouter(v1_base)
 		k8s.SecretRouter(v1_base)
 		k8s.ProjectRouter(v1_base)
@@ -37,6 +38,8 @@ func InitRouter() {
 		k8s.ServiceRouter(v1_base)
 		k8s.IngressRouters(v1_base)
 		k8s.ConfigMapRouter(v1_base)
+		k8s.RegistryRouters(v1_base)
+		k8s.DeploymentRouters(v1_base)
 	}
 
 	v1_monitor := route.Group("/api/v1/monitor")
