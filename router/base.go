@@ -29,6 +29,7 @@ func InitRouter() {
 		roleRouter(v1_base)
 		cloudRouter(v1_base)
 		productRouter(v1_base)
+		userGroupRouters(v1_base)
 
 		k8s.PodRouters(v1_base)
 		k8s.JobsRouter(v1_base)

@@ -34,13 +34,12 @@ func GetClouds(c *gin.Context) {
 		Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	data := gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"page":  query.Page,
 		"size":  query.Size,
 		"total": total,
 		"data":  clouds,
-	}
-	Response(http.StatusOK, "get clouds success", data, c)
+	})
 }
 
 func UpdateCloud(c *gin.Context) {

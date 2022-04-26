@@ -49,13 +49,12 @@ func GetUsers(c *gin.Context) {
 		Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	data := gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"page":  query.Page,
 		"size":  query.Size,
 		"total": total,
 		"data":  users,
-	}
-	Response(http.StatusOK, "get user success", data, c)
+	})
 }
 
 func UpdateUser(c *gin.Context) {

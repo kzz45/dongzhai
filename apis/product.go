@@ -34,13 +34,12 @@ func GetProducts(c *gin.Context) {
 		Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	data := gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"page":  query.Page,
 		"size":  query.Size,
 		"total": total,
 		"data":  products,
-	}
-	Response(http.StatusOK, "get products success", data, c)
+	})
 }
 
 func UpdateProduct(c *gin.Context) {
