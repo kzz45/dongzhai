@@ -4,11 +4,11 @@ import "dongzhai/models"
 
 type Registry struct {
 	models.BaseModel
-	Name     string `json:"name" binding:"required"`
-	Desc     string `json:"desc" binding:"required"`
-	Addr     string `json:"addr" binding:"required"`
+	Name     string `json:"name"`
+	Desc     string `json:"desc"`
+	Addr     string `json:"addr"`
 	Status   int    `json:"status"`
-	Sign     string `json:"sign" binding:"required"`
+	Sign     string `json:"sign"`
 	Username string `json:"username"`
 	Password string `json:"password"`
 }

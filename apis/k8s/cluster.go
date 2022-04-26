@@ -36,13 +36,12 @@ func GetCluster(c *gin.Context) {
 		apis.Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 		return
 	}
-	data := gin.H{
+	c.JSON(http.StatusOK, gin.H{
 		"page":  query.Page,
 		"size":  query.Size,
 		"total": total,
 		"data":  clusters,
-	}
-	apis.Response(http.StatusOK, "get clusters success", data, c)
+	})
 }
 
 func UpdateCluster(c *gin.Context) {

@@ -3,10 +3,12 @@ package router
 import (
 	"dongzhai/apis"
 	"dongzhai/config"
+	"dongzhai/router/k8s"
 	"dongzhai/router/monitor"
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 func InitRouter() {
@@ -27,6 +29,8 @@ func InitRouter() {
 		roleRouter(v1_base)
 		cloudRouter(v1_base)
 		productRouter(v1_base)
+
+		k8s.ClusterRouter(v1_base)
 	}
 
 	v1_monitor := route.Group("/api/v1/monitor")
@@ -35,5 +39,11 @@ func InitRouter() {
 		monitor.ServerRouter(v1_monitor)
 	}
 
+	// v1_k8s := route.Group("/api/v1/k8s/")
+	// {
+	// 	k8s.ClusterRouter(v1_k8s)
+	// }
+	server_name := config.GlobalConfig.Server.Name
+	logrus.Infof("%s running at: %s", server_name, addr)
 	route.Run(addr)
 }

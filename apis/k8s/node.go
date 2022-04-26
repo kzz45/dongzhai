@@ -25,13 +25,12 @@ func GetClusterNodes(c *gin.Context) {
 			apis.Response(http.StatusInternalServerError, fmt.Sprintf("%s", err), nil, c)
 			return
 		}
-		data := gin.H{
+		c.JSON(http.StatusOK, gin.H{
 			"page":  query.Page,
 			"size":  query.Size,
 			"total": total,
 			"data":  nodes,
-		}
-		apis.Response(http.StatusOK, "get cluster nodes success", data, c)
+		})
 		return
 	}
 	apis.Response(http.StatusOK, "need cluster_id", nil, c)
